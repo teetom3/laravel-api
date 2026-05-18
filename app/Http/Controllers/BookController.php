@@ -7,12 +7,13 @@ use App\Models\Book;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return BookResource::collection(Book::all());
+        return BookResource::collection(Book::paginate(2));
     }
 
     public function store(Request $request): BookResource
@@ -31,7 +32,13 @@ class BookController extends Controller
 
     public function show(Book $book): BookResource
     {
-        return new BookResource($book);
+        $cached = Cache::remember(
+            "book.{$book->id}",
+            now()->addMinutes(60),
+            fn () => $book
+        );
+
+        return new BookResource($cached);
     }
 
     public function update(Request $request, Book $book): BookResource
@@ -45,11 +52,15 @@ class BookController extends Controller
 
         $book->update($validated);
 
+        Cache::forget("book.{$book->id}");
+
         return new BookResource($book);
     }
 
     public function destroy(Book $book): JsonResponse
     {
+        Cache::forget("book.{$book->id}");
+
         $book->delete();
 
         return response()->json(null, 204);
