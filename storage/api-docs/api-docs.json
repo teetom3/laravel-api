@@ -22,6 +22,9 @@
                 "operationId": "28b9632495ac5f6f66b2e52001d510e6",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "Numéro de page",
@@ -104,6 +107,14 @@
                 "summary": "Créer un livre",
                 "description": "Crée un nouveau livre. Authentification requise.",
                 "operationId": "b10f5fe35eefa47e974dd4b333d870b1",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ContentTypeJsonHeader"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -220,6 +231,9 @@
                 "operationId": "fa3cb0e436990c742c4f38ab106b9136",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
                         "name": "book",
                         "in": "path",
                         "description": "ID du livre",
@@ -272,6 +286,12 @@
                 "description": "Met à jour un livre existant. Authentification requise. Tous les champs sont optionnels mais doivent respecter les contraintes s'ils sont fournis.",
                 "operationId": "50e7b2eca050a3ef97cf6d7a87d15080",
                 "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ContentTypeJsonHeader"
+                    },
                     {
                         "name": "book",
                         "in": "path",
@@ -407,6 +427,9 @@
                 "operationId": "01bc541887bc453514c0c09cd1a143f0",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
                         "name": "book",
                         "in": "path",
                         "description": "ID du livre",
@@ -469,6 +492,14 @@
                 "summary": "Inscription d'un utilisateur",
                 "description": "Crée un nouveau compte utilisateur et renvoie un token Sanctum.",
                 "operationId": "f1fde7f4a932e393f6042d1b92e65b0a",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ContentTypeJsonHeader"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -572,6 +603,14 @@
                 "summary": "Connexion d'un utilisateur",
                 "description": "Authentifie un utilisateur et renvoie un token Sanctum. Limité à 10 requêtes par minute.",
                 "operationId": "abc53c091ac89d7a2af0892997d1ee08",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ContentTypeJsonHeader"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -683,6 +722,11 @@
                 "summary": "Déconnexion de l'utilisateur courant",
                 "description": "Supprime le token Sanctum utilisé pour la requête.",
                 "operationId": "43958ea73917f8e50945f73452c3bff0",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AcceptJsonHeader"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Déconnexion réussie",
@@ -769,6 +813,28 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "parameters": {
+            "AcceptJsonHeader": {
+                "name": "Accept",
+                "in": "header",
+                "description": "Force Laravel à renvoyer du JSON",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "default": "application/json"
+                }
+            },
+            "ContentTypeJsonHeader": {
+                "name": "Content-Type",
+                "in": "header",
+                "description": "Type de contenu envoyé",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "default": "application/json"
+                }
             }
         },
         "securitySchemes": {

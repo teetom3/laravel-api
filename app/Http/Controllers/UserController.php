@@ -26,6 +26,10 @@ class UserController extends Controller
             )
         ),
         tags: ['Auth'],
+        parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
+            new OA\Parameter(ref: '#/components/parameters/ContentTypeJsonHeader'),
+        ],
         responses: [
             new OA\Response(
                 response: 201,
@@ -90,6 +94,10 @@ class UserController extends Controller
             )
         ),
         tags: ['Auth'],
+        parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
+            new OA\Parameter(ref: '#/components/parameters/ContentTypeJsonHeader'),
+        ],
         responses: [
             new OA\Response(
                 response: 200,
@@ -155,6 +163,9 @@ class UserController extends Controller
         description: 'Supprime le token Sanctum utilisé pour la requête.',
         security: [['bearerAuth' => []]],
         tags: ['Auth'],
+        parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
+        ],
         responses: [
             new OA\Response(
                 response: 200,

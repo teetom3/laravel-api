@@ -16,6 +16,22 @@ use OpenApi\Attributes as OA;
     bearerFormat: 'Sanctum',
     scheme: 'bearer'
 )]
+#[OA\Parameter(
+    parameter: 'AcceptJsonHeader',
+    name: 'Accept',
+    description: 'Force Laravel à renvoyer du JSON',
+    in: 'header',
+    required: true,
+    schema: new OA\Schema(type: 'string', default: 'application/json')
+)]
+#[OA\Parameter(
+    parameter: 'ContentTypeJsonHeader',
+    name: 'Content-Type',
+    description: 'Type de contenu envoyé',
+    in: 'header',
+    required: true,
+    schema: new OA\Schema(type: 'string', default: 'application/json')
+)]
 #[OA\Tag(name: 'Auth', description: 'Inscription, connexion et déconnexion')]
 #[OA\Tag(name: 'Books', description: 'Gestion des livres')]
 class OpenApiDefinition

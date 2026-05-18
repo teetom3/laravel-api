@@ -34,6 +34,7 @@ class BookController extends Controller
         description: 'Retourne la liste des livres paginée (2 par page).',
         tags: ['Books'],
         parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
             new OA\Parameter(name: 'page', description: 'Numéro de page', in: 'query', required: false, schema: new OA\Schema(type: 'integer', example: 1)),
         ],
         responses: [
@@ -83,6 +84,10 @@ class BookController extends Controller
             )
         ),
         tags: ['Books'],
+        parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
+            new OA\Parameter(ref: '#/components/parameters/ContentTypeJsonHeader'),
+        ],
         responses: [
             new OA\Response(
                 response: 201,
@@ -128,6 +133,7 @@ class BookController extends Controller
         description: "Retourne le détail d'un livre. Réponse mise en cache pendant 60 minutes.",
         tags: ['Books'],
         parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
             new OA\Parameter(name: 'book', description: 'ID du livre', in: 'path', required: true, schema: new OA\Schema(type: 'integer', example: 1)),
         ],
         responses: [
@@ -176,6 +182,8 @@ class BookController extends Controller
         ),
         tags: ['Books'],
         parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
+            new OA\Parameter(ref: '#/components/parameters/ContentTypeJsonHeader'),
             new OA\Parameter(name: 'book', description: 'ID du livre', in: 'path', required: true, schema: new OA\Schema(type: 'integer', example: 1)),
         ],
         responses: [
@@ -233,6 +241,7 @@ class BookController extends Controller
         security: [['bearerAuth' => []]],
         tags: ['Books'],
         parameters: [
+            new OA\Parameter(ref: '#/components/parameters/AcceptJsonHeader'),
             new OA\Parameter(name: 'book', description: 'ID du livre', in: 'path', required: true, schema: new OA\Schema(type: 'integer', example: 1)),
         ],
         responses: [
