@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,3 +13,5 @@ Route::get('/ping', function () {
         'message' => 'pong',
     ]);
 });
+
+Route::apiResource('books', BookController::class);
