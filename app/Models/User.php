@@ -49,7 +49,9 @@ class User extends Authenticatable
     }
 
     public function usesProfessionalEmail(): bool
-{
-    return !preg_match('/@(gmail|yahoo|hotmail|live|outlook)\./', $this->email);
-}
+    {
+
+        return !preg_match('/@(gmail|yahoo|hotmail|live|outlook)\./', $this->email);
+        
+    }
 }
